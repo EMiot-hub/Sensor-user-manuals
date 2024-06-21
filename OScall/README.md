@@ -1,1 +1,370 @@
-<html><head><meta content="text/html; charset=UTF-8" http-equiv="content-type"></head><body class="c36 doc-content"><h1 class="c22" id="h.jbi4ru8lstnz"><span class="c5">Dokumentation OsCall</span></h1><p class="c3"><span class="c2">OsCall er en Lorawan knap, lavet til at kunne have behageligt p&aring; h&aring;ndleddet. Trykket har en indbygget ble scanner som rapporterer omkringliggende bleers mac adresser og rssi over Lorawan ved et tryk p&aring; knappen. </span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.tgndr9xniq0v"><span class="c6">Standardindstillinger</span></h3><p class="c3"><span class="c2">OScall kommer med f&oslash;lgende standardindstillinger:</span></p><p class="c3 c17"><span class="c2"></span></p><a id="t.1e7d0fffb074423225050e6bc043f7cf775660a0"></a><a id="t.0"></a><table class="c20"><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c29">Setting</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c29">Standard value</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">Heat Beat interval </span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">120 MIN </span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">Ble scanner </span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">OFF</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">confirmed Heartbeat</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">ON</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">BLE Prefix 1</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">NOT SET</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">BLE Prefix 2</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">NOT SET</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">BLE Prefix 3</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">NOT SET</span></p></td></tr><tr class="c10"><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">Ble scantime</span></p></td><td class="c24" colspan="1" rowspan="1"><p class="c1"><span class="c2">1 SEC</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">&nbsp;</span></p><h3 class="c19" id="h.gnkst81vyskx"><span class="c6">Decoded Payload</span></h3><p class="c3"><span class="c2">Oscall leverer data over fport 1 og 2. </span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Data leveret over fport 1 er heartbeats. </span></p><p class="c3"><span>Et heartbeat har to datatyper &ldquo;</span><span class="c18">reason</span><span>&rdquo; og &ldquo;</span><span class="c18">voltage</span><span>&rdquo;. &nbsp;&ldquo;</span><span class="c18">reason</span><span>&rdquo; refererer til hvorfor trykket sender og vil altid v&aelig;re &nbsp;&ldquo;</span><span class="c18">reason = 0</span><span class="c2">&rdquo; hvis der er tale om et heartbeat. </span></p><p class="c3"><span>&ldquo;</span><span class="c18">Voltage</span><span class="c2">&rdquo; er en m&aring;ling af str&oslash;mniveauet p&aring; trykkets batteri i volt. </span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c29">Eksempel p&aring; fport 1 payload: </span></p><a id="t.a9c2c6b8bae6aac66959579e666f15e2e5542823"></a><a id="t.1"></a><table class="c20"><tr class="c10"><td class="c4" colspan="1" rowspan="1"><p class="c12"><span class="c7">&nbsp; &nbsp;</span><span class="c9">&quot;uplink_message&quot;</span><span class="c7">: {<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;session_key_id&quot;</span><span class="c7">: </span><span class="c9">&quot;AYsQ4d1KVXOoFH3E4cA3Xg==&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;f_port&quot;</span><span class="c7">: </span><span class="c15">1</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;f_cnt&quot;</span><span class="c7">: </span><span class="c15">1</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;frm_payload&quot;</span><span class="c7">: </span><span class="c9">&quot;AB0=&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;decoded_payload&quot;</span><span class="c7">: {<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;reason&quot;</span><span class="c7">: </span><span class="c15">0</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;voltage&quot;</span><span class="c7">: </span><span class="c15">2.9</span><span class="c7"><br> &nbsp; &nbsp; &nbsp;},</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span>Data leveret over fport 2 er et tryk p&aring; knappen. Et tryk p&aring; knappen sender 4 variabler med: &quot;voltage&quot;, &quot;</span><span class="c18">reason</span><span>&quot;, &quot;</span><span class="c18">mac</span><span>&quot; og &ldquo;</span><span class="c18">rssi</span><span>&rdquo;. &quot;</span><span class="c18">Reason</span><span>&quot; er lige med &ldquo;1&rdquo; i forbindelse med et tryk p&aring; knappen. &ldquo;</span><span class="c18">mac</span><span>&rdquo; og &ldquo;</span><span class="c18">rssi</span><span>&rdquo; er et resultat af trykkets ble scan. De to variabler h&aelig;nger sammen p&aring; den m&aring;de at det f&oslash;rste index i &ldquo;</span><span class="c18">mac</span><span>&rdquo; har rssi v&aelig;rdien der er opgivet i f&oslash;rste index i &ldquo;</span><span class="c18">rssi</span><span>&rdquo; og anden index i &ldquo;</span><span class="c18">mac</span><span>&rdquo; har rssi v&aelig;rdien der er angivet i det andet index i &ldquo;</span><span class="c18">rssi</span><span>&rdquo; osv. &ldquo;</span><span class="c18">voltage</span><span class="c2">&rdquo; bliver sendt i volt. (Der arbejdes p&aring; en volt til % converter som kommer i en fremtidig decoder)</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c32">Eksempel p&aring; fport 2 payload:</span><span class="c2">&nbsp;</span></p><a id="t.b0f7a2449df436389f5cc899aba51398aa0b0f77"></a><a id="t.2"></a><table class="c20"><tr class="c10"><td class="c4" colspan="1" rowspan="1"><p class="c12"><span class="c7">&nbsp; &nbsp; </span><span class="c9">&quot;uplink_message&quot;</span><span class="c7">: {<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;session_key_id&quot;</span><span class="c7">: </span><span class="c9">&quot;AYsQ4d1KVXOoFH3E4cA3Xg==&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;f_port&quot;</span><span class="c7">: </span><span class="c15">2</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;f_cnt&quot;</span><span class="c7">: </span><span class="c15">2</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;frm_payload&quot;</span><span class="c7">: </span><span class="c9">&quot;Af8AAWcAN2E4MzBlZmViMGVhfC01MnxhYzIzM2ZmNmNkOGR8LTc3fDU3NjJlYmRhOGY2YXwtODR8ODQyYWZkZTdhNDExfC02NnxhYzIzM2ZmYWRjMjZ8LTY3fGFjMjMzZmZhZGMyN3wtNzB8pQ==&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;decoded_payload&quot;</span><span class="c33 c7">: {</span></p><p class="c12"><span class="c7">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="c9">&quot;voltage&quot;</span><span class="c7">: </span><span class="c15">3.2</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;mac&quot;</span><span class="c7">: [<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;7a830efeb0ea&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;ac233ff6cd8d&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;5762ebda8f6a&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;842afde7a411&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;ac233ffadc26&quot;</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;ac233ffadc27&quot;</span><span class="c7"><br> &nbsp; &nbsp; &nbsp; &nbsp;],<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;reason&quot;</span><span class="c7">: </span><span class="c15">1</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c9">&quot;rssi&quot;</span><span class="c7">: [<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-52</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-77</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-84</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-66</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-67</span><span class="c7">,<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="c15">-70</span><span class="c7"><br> &nbsp; &nbsp; &nbsp; &nbsp;]<br> &nbsp; &nbsp; &nbsp;}</span></p></td></tr></table><h2 class="c34" id="h.hjwi03wlwepo"><span class="c21 c23">Informationer til at lave en decoder</span></h2><h3 class="c19" id="h.q0ya9y9gf6qp"><span class="c6">Fport 1:</span></h3><p class="c3"><span class="c2">For heatbeats sendes (som altid sendes med fport 1) der kun en byte. Byte er batteriniveauet ganget med 10. S&aring; for at f&aring; det i volt, skal man dividere tallet med 10. Dvs for &ldquo;1b&rdquo; som er 29 er batteriet p&aring; 2.9 volt.</span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.n8iajvfer043"><span class="c6">Fport 2:</span></h3><p class="c3"><span class="c2">For et knap tryk (som altid sendes med fport 2) sendes der en lang byte string. Den f&oslash;rste byte er batteriniveauet ganget med 10. S&aring; for at f&aring; det i volt, skal man dividere tallet med 10. Dvs for &ldquo;1b&rdquo; som er 29 er batteriet p&aring; 2.9 volt.</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Resten er en lang byte string som skal decodes samlet. Et eksempel er:</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">&ldquo;6163323333666661646332367C2D36337C3834326166646537613431317C2D37357C6163323333666661646332377C2D36387C6163323333666636636438647C2D35377C&rdquo;</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Som decoded er:</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">&ldquo;ac233ffadc26|-63|842afde7a411|-75|ac233ffadc27|-68|ac233ff6cd8d|-57|&rdquo;</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Her er mac adresserne og rssi v&aelig;rdierne adskilt med et &ldquo;|&rdquo; og den f&oslash;rste mac adresse og den f&oslash;rste rssi v&aelig;rdi h&aelig;nger sammen osv. </span></p><p class="c3 c17"><span class="c2"></span></p><h2 class="c34" id="h.gt36ankma1mc"><span class="c21 c23">Downlink ota konfiguration med encoder</span></h2><p class="c3"><span class="c2">Vis den medf&oslash;lgende encoder til OsCall bliver brugt, er det muligt at konfigurere OsCall med en json fil. Det g&oslash;res med f&oslash;lgende variabler:</span></p><p class="c3 c17"><span class="c2"></span></p><a id="t.e5119bcd03ceed4ee7ebd8e80b4e504e3840248d"></a><a id="t.3"></a><table class="c20"><tr class="c10"><td class="c4" colspan="1" rowspan="1"><p class="c12"><span class="c7">heatbeat_interval = [</span><span class="c15">30</span><span class="c7">,</span><span class="c15">60</span><span class="c7">,</span><span class="c15">120</span><span class="c7">,</span><span class="c15">240</span><span class="c7">,</span><span class="c15">360</span><span class="c7">,</span><span class="c15">480</span><span class="c7">,</span><span class="c15">600</span><span class="c7">,</span><span class="c15">720</span><span class="c7">]; // Is in minutes<br>confirmed_heatbeat = [</span><span class="c30">true</span><span class="c7">, </span><span class="c30">false</span><span class="c7">]; //sets confirmed heartbeat<br>ble_scanner = [</span><span class="c9">&quot;on&quot;</span><span class="c7">, </span><span class="c9">&quot;off&quot;</span><span class="c7">]; //turns on or off the ble scan on button push<br>ble_prefix_1 = [</span><span class="c9">&quot;ac233f&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0001&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0002&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0003&quot;</span><span class="c7">]; //Sets if only specific ble vendor shut be reported by the ble scanner<br>ble_prefix_2 = [</span><span class="c9">&quot;ac233f&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0001&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0002&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0003&quot;</span><span class="c7">]; //Sets if only specific ble vendor shut be reported by the ble scanner<br>ble_prefix_3 = [</span><span class="c9">&quot;ac233f&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0001&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0002&quot;</span><span class="c7">,</span><span class="c9">&quot;oc0003&quot;</span><span class="c7 c33">]; //Sets if only specific ble vendor shut be reported by the ble scanner</span></p><p class="c12"><span class="c33 c7">factory_reset = [&quot;yes&quot;]; //Returns to standard settings</span></p><p class="c12"><span class="c33 c7">var scan_time = [1,2]; //Scan time in seconds</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Et eksempel p&aring; en json konfiguration kunne v&aelig;re:</span></p><p class="c3 c17"><span class="c2"></span></p><a id="t.d4e68cc5c64749be0a4277a36d2a3a9d59ad4bda"></a><a id="t.4"></a><table class="c20"><tr class="c10"><td class="c4" colspan="1" rowspan="1"><p class="c12"><span class="c7">{<br> &nbsp;&quot;heatbeat_interval&quot;: </span><span class="c15">240</span><span class="c7">,<br> &nbsp;&quot;confirmed_heatbeat&quot;: </span><span class="c30">true</span><span class="c7">,<br> &nbsp;&quot;ble_scanner&quot;: </span><span class="c9">&quot;on&quot;</span><span class="c7">,<br> &nbsp;&quot;ble_prefix_1&quot;: </span><span class="c9">&quot;&quot;</span><span class="c7">,<br> &nbsp;&quot;ble_prefix_2&quot;: </span><span class="c9">&quot;&quot;</span><span class="c7">,<br> &nbsp;&quot;ble_prefix_3&quot;: </span><span class="c9">&quot;&quot;</span><span class="c33 c7">, &nbsp;</span></p><p class="c12"><span class="c7">&nbsp; &quot;scan_time&quot; &quot;:</span><span class="c38">&nbsp;</span><span class="c31">1</span></p><p class="c12"><span class="c7">}</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Eller for at factory reset OScall&rsquo;et kan json konfiguration kunne v&aelig;re:</span></p><p class="c3 c17"><span class="c2"></span></p><a id="t.b03a910b86f402df964d29558c2b51b2c04b488c"></a><a id="t.5"></a><table class="c20"><tr class="c10"><td class="c4" colspan="1" rowspan="1"><p class="c12"><span class="c7">{<br> &nbsp; &quot;factory_reset&quot;: </span><span class="c9">&quot;yes&quot;</span><span class="c7"><br>}</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c2">Her s&aelig;ttes heartbeat intervallet til 240 minutter, at Oscall skal sende confirmed heartbeats, ble scanneren er t&aelig;ndt under knap tryk og der er ikke sat nogle ble prefixes s&aring; alle enheder bliver sendt med efter et tryk.</span></p><p class="c3 c17"><span class="c2"></span></p><h2 class="c34" id="h.t6rtdpiuozt6"><span class="c21 c23">Manuelt kreation af byte string til downlink ota konfiguration</span></h2><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.oupm2eg11w6b"><span class="c6">Indstilling af &nbsp;heart beats rate: </span></h3><p class="c12 c17"><span class="c33 c15"></span></p><a id="t.eeafa4d3a8b1d9664c4f7b29e14a8629f34e6796"></a><a id="t.6"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Heartbeat interval (min)</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">30</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">00 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">60</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">01 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">120</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">02 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">240</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">03 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">360</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">04 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">480</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">05 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">600</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">06 ff ff ff ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">720</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">07 ff ff ff ff ff ff</span></p></td></tr></table><p class="c12 c17"><span class="c33 c15"></span></p><h3 class="c19" id="h.pxpl392ewe7p"><span class="c6">Indstilling af confirmed Hard beat:</span></h3><p class="c12 c17"><span class="c33 c15"></span></p><a id="t.08c637a247d5d63d2ab01c97518ddb82228a5ff5"></a><a id="t.7"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c3"><span class="c16 c32">Confirmed Hard beat</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c35"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">False</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff 00 ff ff ff ff ff</span></p></td></tr><tr class="c39"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">True</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff 01 ff ff ff ff ff</span></p></td></tr></table><p class="c12 c17"><span class="c11"></span></p><h3 class="c19" id="h.ia6zx3d0akbt"><span class="c6">Indstilling af ble scanneren:</span></h3><p class="c12 c17"><span class="c33 c15"></span></p><a id="t.78098e972e325d4d82d92880ba04ce59fb33b336"></a><a id="t.8"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c3"><span class="c16 c32">ble scanneren</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c37"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">on</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff 00 ff ff ff ff</span></p></td></tr><tr class="c39"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">off</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff 01 ff ff ff ff</span></p></td></tr></table><p class="c3 c17"><span class="c11"></span></p><p class="c3 c17"><span class="c11"></span></p><h3 class="c19" id="h.ed515gcwssv4"><span class="c6">Indstilling af &nbsp;ble prefix 1: </span></h3><p class="c3"><span class="c21 c16">For at indstille ble prefix 1 skal der i 4&rsquo;er byte sendes indexet af den &oslash;nskede ble producenters mac adresse. S&aring; for for &ldquo;Minew&rdquo; ble beacons skal der sendes 00 i 4 byte.</span></p><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3"><span class="c16">Liste over godkendte ble producenters mac adresse: </span><span class="c11">[&quot;ac233f&quot;,&quot;oc0001&quot;,&quot;oc0002&quot;,&quot;oc0003&quot;]</span></p><p class="c12 c17"><span class="c33 c15"></span></p><a id="t.68aaf563478f29dab08edf0d3d2c133af07a3fb4"></a><a id="t.9"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">ble prefix 1</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;ac233f&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff 00 ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0001&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff 01 ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0002&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff 02 ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">...</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff xx ff ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c27">ble prefix 1 off</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff ff ff</span></p></td></tr></table><p class="c12 c17"><span class="c11"></span></p><h3 class="c19" id="h.kzvos69jllmu"><span class="c6">Indstilling af &nbsp;ble prefix 2: </span></h3><p class="c3"><span class="c21 c16">For at indstille ble prefix 2 skal der i 5&rsquo;er byte sendes indexet af den &oslash;nskede ble producenters mac adresse. Index starter i 0. S&aring; for for &ldquo;Minew&rdquo; ble beacons skal der sendes 00 i 5 byte.</span></p><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3"><span class="c16">Liste over godkendte ble producenters mac adresse: </span><span class="c11">[&quot;ac233f&quot;,&quot;oc0001&quot;,&quot;oc0002&quot;,&quot;oc0003&quot;]</span></p><p class="c3"><span class="c16 c32">&nbsp;</span></p><a id="t.9ab4797553576218d10ade3b8d3b158ecd0fe278"></a><a id="t.10"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">ble prefix 2</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;ac233f&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff 00 ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0001&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff 01 ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0002&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff 02 ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">...</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff xx ff ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c27">ble prefix 1 off</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff ff ff</span></p></td></tr></table><p class="c12 c17"><span class="c11"></span></p><h3 class="c19" id="h.wdk2tha2ujj5"><span class="c6">Indstilling af &nbsp;ble prefix 3: </span></h3><p class="c3"><span class="c21 c16">For at indstille ble prefix 3 skal der i 6&rsquo;er byte sendes indexet af den &oslash;nskede ble producenters mac adresse. Index starter i 0. S&aring; for &ldquo;Minew&rdquo; ble beacons skal der sendes 00 i 6 byte.</span></p><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3"><span class="c16">Liste over godkendte ble producenters mac adresse: </span><span class="c11">[&quot;ac233f&quot;,&quot;oc0001&quot;,&quot;oc0002&quot;,&quot;oc0003&quot;]</span></p><p class="c3 c17"><span class="c11"></span></p><a id="t.19797be5c31ad5aedf82fa3d9498ad17eff5beef"></a><a id="t.11"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">ble prefix 3</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;ac233f&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff 00 ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0001&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff 01 ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;oc0002&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff 02 ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">...</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff xx ff</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c27">ble prefix 1 off</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff ff ff</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.af9xo3fm5n7y"><span class="c6">Factory resetting OTA:</span></h3><p class="c3"><span class="c16 c21">For at factory resette OScall OTA kan man sende &ldquo;00&rdquo; til bit 7. Dette vil f&aring; OScall&rsquo;et til at g&aring; tilbage til standard indstillinger som beskrevet i &quot;Standardindstillinger&quot;.</span></p><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3 c17"><span class="c21 c16"></span></p><a id="t.e6e6b394488fcb91ea9d4b4e2a3452e0155e2ae1"></a><a id="t.12"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">factory reset</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">&quot;Yes&quot;</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff ff 00 ff</span></p></td></tr></table><p class="c12 c17"><span class="c2"></span></p><h3 class="c19 c25" id="h.gdvdqrhjfq37"><span class="c6"></span></h3><h3 class="c19 c25" id="h.8ymvcrr37ozw"><span class="c6"></span></h3><h3 class="c19" id="h.qlctr84zqumj"><span class="c6">Scan time OTA:</span></h3><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3"><span class="c21 c16">Scan time s&aelig;ttes i byte 8 og kan s&aelig;ttes til 1 eller 2 sekunder. </span></p><p class="c3 c17"><span class="c21 c16"></span></p><p class="c3 c17"><span class="c21 c16"></span></p><a id="t.cb1e73a53e33edeb8a34bb034b17464aabb0ccb8"></a><a id="t.13"></a><table class="c20"><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">fport</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Scan time</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c14">Sent byte</span></p></td></tr><tr class="c10"><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">10</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">2</span></p></td><td class="c8" colspan="1" rowspan="1"><p class="c1"><span class="c0">ff ff ff ff ff ff ff 01</span></p></td></tr></table><p class="c12 c17"><span class="c2"></span></p><h3 class="c19" id="h.373snd7nhlpr"><span class="c6">Dekoder/encoder:</span></h3><p class="c3"><span>I mappen &ldquo;</span><span class="c18">De/encodere&rdquo;</span><span class="c2">&nbsp;kan dekoderen findes til forskellige netv&aelig;rk som TTN (The Things Network). Det er en javascript dekodere som kan lave den r&aring; byte string om til det format som er beskrevet ovenfor. </span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.e5clyyi39vfl"><span class="c6">Reset/rejoin OsCall</span></h3><p class="c3"><span>Oscall kan resettes ved at </span><span class="c32">holde knappen ned i 20 sek </span><span>og 4 blink skulle kunne ses</span><span class="c32">.</span><span class="c2">&nbsp;Herefter vil OsCall re-join netv&aelig;rket. Brug denne funktion hvis man &oslash;nsker at skifte netv&aelig;rk / joine en anden Lorawan server, eller vil resette konfigurationen p&aring; &nbsp;trykket.</span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span class="c32">Holdes knappen inden i 40 sekunder eller over, vil OScall resette til factory settings</span><span class="c2">. N&aring;r det sker, vil OScall blinke med 4 lange blink. </span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.bn7e8bh13ea4"><span class="c6">Batteriskift: </span></h3><p class="c3"><span class="c2">Knap kassen er forseglet og vandt&aelig;t IP65 og der kan derfor ikke skiftes batteri uden specialv&aelig;rkt&oslash;j. Derfor kommer OsCall med en refurbished aftale. </span></p><p class="c3 c17"><span class="c2"></span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.r1rxoltbdglw"><span class="c6">Debugging</span></h3><p class="c3 c17"><span class="c2"></span></p><a id="t.3dccc808a5cb29a8fd379b2afb111146d331fa96"></a><a id="t.14"></a><table class="c20"><tr class="c10"><td class="c26" colspan="1" rowspan="1"><p class="c1"><span class="c29">Blink type</span></p></td><td class="c13" colspan="1" rowspan="1"><p class="c1"><span class="c29">Betydning</span></p></td></tr><tr class="c10"><td class="c26" colspan="1" rowspan="1"><p class="c1"><span class="c2">Langt blink</span></p></td><td class="c13" colspan="1" rowspan="1"><p class="c1"><span class="c2">Normalt tryk p&aring; knappen n&aring;r Oscall er p&aring; et lorawan netv&aelig;rk.</span></p></td></tr><tr class="c10"><td class="c26" colspan="1" rowspan="1"><p class="c1"><span class="c2">2 Blink</span></p></td><td class="c13" colspan="1" rowspan="1"><p class="c1"><span class="c2">OsCallet er ikke joinet et netv&aelig;rk og pr&oslash;ver hver 12 time eller efter en genstart. </span></p></td></tr><tr class="c10"><td class="c26" colspan="1" rowspan="1"><p class="c1"><span class="c2">4 blink </span></p></td><td class="c13" colspan="1" rowspan="1"><p class="c1"><span class="c2">Oscallet genstarter</span></p></td></tr><tr class="c10"><td class="c26" colspan="1" rowspan="1"><p class="c1"><span>4 </span><span class="c32">LANGE</span><span class="c2">&nbsp;blink</span></p></td><td class="c13" colspan="1" rowspan="1"><p class="c1"><span class="c2">Oscallet factory resettes</span></p></td></tr></table><p class="c3 c17"><span class="c2"></span></p><p class="c3 c17"><span class="c2"></span></p><h3 class="c19" id="h.qyvml0tknxbn"><span class="c6">Kontakt</span></h3><p class="c3 c17"><span class="c2"></span></p><p class="c3"><span>For yderligere sp&oslash;rgsm&aring;l kan man kontakte </span><span class="c40"><a class="c28" href="mailto:oi@emiot.dk">oscar@emiot.dk</a></span><span>&nbsp;eller ringe +45 25798300</span></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OsCall Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .contact a {
+            color: #1155cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>OsCall Documentation</h1>
+
+<h2>Overview</h2>
+<p>OsCall is a LoRaWAN button designed to be comfortably worn on the wrist. The button features a built-in BLE scanner that reports surrounding BLE MAC addresses and RSSI over LoRaWAN when the button is pressed.</p>
+
+<h2>Default Settings</h2>
+<table>
+    <tr>
+        <th>Setting</th>
+        <th>Default Value</th>
+    </tr>
+    <tr>
+        <td>Heartbeat Interval</td>
+        <td>120 MIN</td>
+    </tr>
+    <tr>
+        <td>BLE Scanner</td>
+        <td>OFF</td>
+    </tr>
+    <tr>
+        <td>Confirmed Heartbeat</td>
+        <td>ON</td>
+    </tr>
+    <tr>
+        <td>BLE Prefix 1</td>
+        <td>NOT SET</td>
+    </tr>
+    <tr>
+        <td>BLE Prefix 2</td>
+        <td>NOT SET</td>
+    </tr>
+    <tr>
+        <td>BLE Prefix 3</td>
+        <td>NOT SET</td>
+    </tr>
+    <tr>
+        <td>BLE Scan Time</td>
+        <td>1 SEC</td>
+    </tr>
+</table>
+
+<h2>Decoded Payload</h2>
+<p>OsCall delivers data over fport 1 and 2.</p>
+
+<h3>Fport 1</h3>
+<p><strong>Heartbeats</strong>: Contains <code>reason</code> and <code>voltage</code>.</p>
+<ul>
+    <li><code>reason</code>: Always <code>reason = 0</code> for heartbeats.</li>
+    <li><code>voltage</code>: Battery voltage in volts.</li>
+</ul>
+<p><strong>Example of fport 1 payload:</strong></p>
+<pre>
+<code>{
+  "uplink_message": {
+    "session_key_id": "AYsQ4d1KVXOoFH3E4cA3Xg==",
+    "f_port": 1,
+    "f_cnt": 1,
+    "frm_payload": "AB0=",
+    "decoded_payload": {
+      "reason": 0,
+      "voltage": 2.9
+    }
+  }
+}
+</code>
+</pre>
+
+<h3>Fport 2</h3>
+<p><strong>Button Press</strong>: Sends <code>voltage</code>, <code>reason</code>, <code>mac</code>, and <code>rssi</code>.</p>
+<ul>
+    <li><code>reason</code>: <code>1</code> for button press.</li>
+    <li><code>mac</code> and <code>rssi</code>: Results of the BLE scan.</li>
+</ul>
+<p><strong>Example of fport 2 payload:</strong></p>
+<pre>
+<code>{
+  "uplink_message": {
+    "session_key_id": "AYsQ4d1KVXOoFH3E4cA3Xg==",
+    "f_port": 2,
+    "f_cnt": 2,
+    "frm_payload": "Af8AAWcAN2E4MzBlZmViMGVhfC01MnxhYzIzM2ZmNmNkOGR8LTc3fDU3NjJlYmRhOGY2YXwtODR8ODQyYWZkZTdhNDExfC02NnxhYzIzM2ZmYWRjMjZ8LTY3fGFjMjMzZmZhZGMyN3wtNzB8pQ==",
+    "decoded_payload": {
+      "voltage": 3.2,
+      "mac": [
+        "7a830efeb0ea",
+        "ac233ff6cd8d",
+        "5762ebda8f6a",
+        "842afde7a411",
+        "ac233ffadc26",
+        "ac233ffadc27"
+      ],
+      "reason": 1,
+      "rssi": [
+        -52,
+        -77,
+        -84,
+        -66,
+        -67,
+        -70
+      ]
+    }
+  }
+}
+</code>
+</pre>
+
+<h2>Creating a Decoder</h2>
+
+<h3>Fport 1</h3>
+<p>Heartbeats sent with fport 1 contain one byte representing the battery level multiplied by 10. To get the voltage, divide the value by 10.</p>
+
+<h3>Fport 2</h3>
+<p>Button press sends a long byte string. The first byte is the battery level multiplied by 10. The rest is a long byte string to be decoded as described.</p>
+
+<h2>Downlink OTA Configuration</h2>
+<p>Using the provided encoder, you can configure OsCall with a JSON file.</p>
+
+<h3>Example JSON Configuration:</h3>
+<pre>
+<code>{
+  "heartbeat_interval": 240,
+  "confirmed_heartbeat": true,
+  "ble_scanner": "on",
+  "ble_prefix_1": "",
+  "ble_prefix_2": "",
+  "ble_prefix_3": "",
+  "scan_time": 1
+}
+</code>
+</pre>
+
+<h3>Factory Reset JSON Configuration:</h3>
+<pre>
+<code>{
+  "factory_reset": "yes"
+}
+</code>
+</pre>
+
+<h2>Manual Byte String Creation for Downlink OTA Configuration</h2>
+
+<h3>Heartbeat Interval:</h3>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>Heartbeat Interval (min)</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>30</td>
+        <td>00 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>60</td>
+        <td>01 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>120</td>
+        <td>02 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>240</td>
+        <td>03 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>360</td>
+        <td>04 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>480</td>
+        <td>05 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>600</td>
+        <td>06 ff ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>720</td>
+        <td>07 ff ff ff ff ff ff</td>
+    </tr>
+</table>
+
+<h3>Confirmed Heartbeat:</h3>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>Confirmed Heartbeat</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>False</td>
+        <td>ff 00 ff ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>True</td>
+        <td>ff 01 ff ff ff ff ff</td>
+    </tr>
+</table>
+
+<h3>BLE Scanner:</h3>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>BLE Scanner</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>on</td>
+        <td>ff ff 00 ff ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>off</td>
+        <td>ff ff 01 ff ff ff ff</td>
+    </tr>
+</table>
+
+<h3>BLE Prefix 1:</h3>
+<p>For setting BLE prefix 1, the index of the desired BLE manufacturer’s MAC address is sent in the 4th byte. For "Minew" BLE beacons, send 00 in the 4th byte.</p>
+<p>List of approved BLE manufacturer MAC addresses: <code>["ac233f","oc0001","oc0002","oc0003"]</code></p>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>BLE Prefix 1</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>"ac233f"</td>
+        <td>ff ff ff 00 ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>"oc0001"</td>
+        <td>ff ff ff 01 ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>"oc0002"</td>
+        <td>ff ff ff 02 ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>...</td>
+        <td>ff ff ff xx ff ff ff</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>off</td>
+        <td>ff ff ff ff ff ff ff</td>
+    </tr>
+</table>
+
+<h3>Factory Resetting OTA:</h3>
+<p>To factory reset OsCall OTA, send "00" to bit 7. This will return OsCall to default settings as described in "Default Settings".</p>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>Factory Reset</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>Yes</td>
+        <td>ff ff ff ff ff ff 00 ff</td>
+    </tr>
+</table>
+
+<h3>Scan Time OTA:</h3>
+<p>Scan time is set in byte 8 and can be set to 1 or 2 seconds.</p>
+<table>
+    <tr>
+        <th>fport</th>
+        <th>Scan Time</th>
+        <th>Sent Byte</th>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>2</td>
+        <td>ff ff ff ff ff ff ff 01</td>
+    </tr>
+</table>
+
+<h2>Decoder/Encoder</h2>
+<p>In the "De/Encoders" folder, you can find the decoder for different networks like TTN (The Things Network). It is a JavaScript decoder that can convert the raw byte string into the format described above.</p>
+
+<h2>Reset/Rejoin OsCall</h2>
+<p>To reset OsCall, hold the button for 20 seconds until 4 blinks are seen. This will cause OsCall to re-join the network. Use this function if you wish to switch networks or reset the configuration.</p>
+<p>Holding the button for 40 seconds or more will reset OsCall to factory settings, indicated by 4 long blinks.</p>
+
+<h2>Battery Replacement</h2>
+<p>The button casing is sealed and waterproof (IP65), and the battery cannot be replaced without special tools. Therefore, OsCall comes with a refurbished agreement.</p>
+
+<h2>Debugging</h2>
+<table>
+    <tr>
+        <th>Blink Type</th>
+        <th>Meaning</th>
+    </tr>
+    <tr>
+        <td>Long Blink</td>
+        <td>Normal button press when OsCall is on a LoRaWAN network.</td>
+    </tr>
+    <tr>
+        <td>2 Blinks</td>
+        <td>OsCall is not joined to a network and tries every 12 hours or after a restart.</td>
+    </tr>
+    <tr>
+        <td>4 Blinks</td>
+        <td>OsCall is restarting.</td>
+    </tr>
+    <tr>
+        <td>4 Long Blinks</td>
+        <td>OsCall is factory resetting.</td>
+    </tr>
+</table>
+
+<h2>Contact</h2>
+<p>For further questions, contact <a href="mailto:oscar@emiot.dk">oscar@emiot.dk</a> or call +45 25798300.</p>
+
+</body>
+</html>
