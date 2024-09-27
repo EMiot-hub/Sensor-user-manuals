@@ -84,8 +84,8 @@ function encodeDownlink(input) {
     };
 }
 
-// Test input data
-var testInput = {
+// Input data
+var Input_config = {
     data: {
         otaaPeriods: 30,
         confirmedHeatbeat: true,
@@ -104,5 +104,5 @@ var testInput = {
 };
 
 // Run the encoding function
-var result = encodeDownlink(testInput);
+var result = encodeDownlink(Input_config);
 console.log(result);
