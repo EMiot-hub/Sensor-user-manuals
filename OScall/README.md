@@ -118,7 +118,7 @@
 <p>Heartbeats sent with fport 1 contain one byte representing the battery level multiplied by 10. To get the voltage, divide the value by 10.</p>
 
 <h3>Fport 2</h3>
-<p>Button press sends a long byte string. The first byte is the battery level multiplied by 10. The rest is a long byte string to be decoded as described.</p>
+<p>Button press sends a long byte string. The first byte is the battery level multiplied by 10. The rest is a long byte string.</p>
 
 <h2>Downlink OTA Configuration</h2>
 <p>Using the provided encoder, you can configure OsCall with a JSON file.</p>
@@ -129,7 +129,7 @@
   "heartbeat_interval": 240,
   "confirmed_heartbeat": true,
   "ble_scanner": "on",
-  "ble_prefix_1": "",
+  "ble_prefix_1": "ac233f",
   "ble_prefix_2": "",
   "ble_prefix_3": "",
   "scan_time": 1
@@ -145,170 +145,16 @@
 </code>
 </pre>
 
-<h2>Manual Byte String Creation for Downlink OTA Configuration</h2>
-
-<h3>Heartbeat Interval:</h3>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>Heartbeat Interval (min)</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>30</td>
-        <td>00 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>60</td>
-        <td>01 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>120</td>
-        <td>02 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>240</td>
-        <td>03 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>360</td>
-        <td>04 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>480</td>
-        <td>05 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>600</td>
-        <td>06 ff ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>720</td>
-        <td>07 ff ff ff ff ff ff</td>
-    </tr>
-</table>
-
-<h3>Confirmed Heartbeat:</h3>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>Confirmed Heartbeat</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>False</td>
-        <td>ff 00 ff ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>True</td>
-        <td>ff 01 ff ff ff ff ff</td>
-    </tr>
-</table>
-
-<h3>BLE Scanner:</h3>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>BLE Scanner</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>on</td>
-        <td>ff ff 00 ff ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>off</td>
-        <td>ff ff 01 ff ff ff ff</td>
-    </tr>
-</table>
-
-<h3>BLE Prefix 1:</h3>
-<p>For setting BLE prefix 1, the index of the desired BLE manufacturer’s MAC address is sent in the 4th byte. For "Minew" BLE beacons, send 00 in the 4th byte.</p>
-<p>List of approved BLE manufacturer MAC addresses: <code>["ac233f","oc0001","oc0002","oc0003"]</code></p>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>BLE Prefix 1</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>"ac233f"</td>
-        <td>ff ff ff 00 ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>"oc0001"</td>
-        <td>ff ff ff 01 ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>"oc0002"</td>
-        <td>ff ff ff 02 ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>...</td>
-        <td>ff ff ff xx ff ff ff</td>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>off</td>
-        <td>ff ff ff ff ff ff ff</td>
-    </tr>
-</table>
-
-<h3>Factory Resetting OTA:</h3>
-<p>To factory reset OsCall OTA, send "00" to bit 7. This will return OsCall to default settings as described in "Default Settings".</p>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>Factory Reset</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>Yes</td>
-        <td>ff ff ff ff ff ff 00 ff</td>
-    </tr>
-</table>
-
-<h3>Scan Time OTA:</h3>
-<p>Scan time is set in byte 8 and can be set to 1 or 2 seconds.</p>
-<table>
-    <tr>
-        <th>fport</th>
-        <th>Scan Time</th>
-        <th>Sent Byte</th>
-    </tr>
-    <tr>
-        <td>10</td>
-        <td>2</td>
-        <td>ff ff ff ff ff ff ff 01</td>
-    </tr>
-</table>
 
 <h2>Decoder/Encoder</h2>
 <p>In the "De/Encoders" folder, you can find the decoder for different networks like TTN (The Things Network). It is a JavaScript decoder that can convert the raw byte string into the format described above.</p>
 
 <h2>Reset/Rejoin OsCall</h2>
 <p>To reset OsCall, hold the button for 20 seconds until 4 blinks are seen. This will cause OsCall to re-join the network. Use this function if you wish to switch networks or reset the configuration.</p>
-<p>Holding the button for 40 seconds or more will reset OsCall to factory settings, indicated by 4 long blinks.</p>
+<p>Holding the button for 40 seconds or more will reset OsCall to factory settings, indicated by 4 long blinks. When factory reset it do not restart, meaning it will keep its link to the current network</p>
 
 <h2>Battery Replacement</h2>
-<p>The button casing is sealed and waterproof (IP65), and the battery cannot be replaced without special tools. Therefore, OsCall comes with a refurbished agreement.</p>
+<p>The button casing is sealed and waterproof (IP64), and the battery cannot be replaced without special tools. Therefore, OsCall comes with a refurbished agreement.</p>
 
 <h2>Debugging</h2>
 <table>
