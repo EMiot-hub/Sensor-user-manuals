@@ -87,19 +87,19 @@ function encodeDownlink(input) {
 // Input data
 var Input_config = {
     data: {
-        otaaPeriods: 30,
-        confirmedHeatbeat: true,
-        bleScanner: "on",
-        cal_value_force_1: 0,
-        cal_value_force_2: 0,
-        cal_value_force_3: 0,
-        cal_value_force_4: 0,
-        auto_calibration: "",
-        blePrefix1: "",
-        blePrefix2: "",
-        blePrefix3: "",
-        bleScanTime: 2,
-        setDefaultSettings: ""
+        otaaPeriods: 30,               // Selected OTAA period (30 seconds)
+        confirmedHeatbeat: true,        // Enable confirmed heartbeat messages
+        bleScanner: "on",               // BLE scanner is enabled
+        cal_value_force_1: 0,           // Calibration value for force 1
+        cal_value_force_2: 0,           // Calibration value for force 2
+        cal_value_force_3: 0,           // Calibration value for force 3
+        cal_value_force_4: 0,           // Calibration value for force 4
+        auto_calibration: "yes",        // Trigger auto-calibration when received
+        blePrefix1: "",                 // No custom BLE prefix for this example
+        blePrefix2: "",                 // No custom BLE prefix for this example
+        blePrefix3: "",                 // No custom BLE prefix for this example
+        bleScanTime: 2,                 // BLE scan time (long scan time, in seconds)
+        setDefaultSettings: ""          // Not resetting to factory settings
     }
 };
 
