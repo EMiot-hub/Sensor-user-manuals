@@ -148,6 +148,7 @@
 
 <h2>Decoder/Encoder</h2>
 <p>In the "De/Encoders" folder, you can find the decoder for different networks like TTN (The Things Network). It is a JavaScript decoder that can convert the raw byte string into the format described above.</p>
+<a href="https://github.com/EMiot-hub/Sensor-user-manuals/tree/main/OScall/Encoder-Decoder">It is also possible to generate a downlink config with the supplied javascript program.</a>
 
 <h2>Reset/Rejoin OsCall</h2>
 <p>To reset OsCall, hold the button for 20 seconds until 4 blinks are seen. This will cause OsCall to re-join the network. Use this function if you wish to switch networks or reset the configuration.</p>
