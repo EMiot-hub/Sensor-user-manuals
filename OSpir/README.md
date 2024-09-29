@@ -12,6 +12,8 @@
 <p>OSpir is a lorawan pir sensor. The sensor features a built-in BLE scanner that reports surrounding BLE MAC addresses and RSSI over LoRaWAN when trigget. <\More info is to come soon> </p>
 
 
+<a href="https://github.com/EMiot-hub/Sensor-user-manuals/tree/main/OSpir/decoder-encoder/JS%20encoder%20cmd%20run">Encoder manual for OSpir js encoder</a>
+
 <h2>Contact</h2>
 <p>For further questions, contact <a href="mailto:oscar@emiot.dk">oscar@emiot.dk</a> or call +45 25798300.</p>
 
