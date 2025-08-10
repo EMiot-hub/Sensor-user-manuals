@@ -49,23 +49,22 @@
 
   <h2>Example Input Configuration</h2>
     <pre>
-var Input_config = {
-    data: {
-        otaaPeriods: 30,               // Selected OTAA period (30 seconds)
-        confirmedHeatbeat: true,        // Enable confirmed heartbeat messages
-        bleScanner: "off",               // BLE scanner is enabled
-        cal_value_force_1: 0,           // Calibration value for force 1
-        cal_value_force_2: 0,           // Calibration value for force 2
-        check_int: 10,                  // Time interval between force measurements (in seconds - only 4,5,7,8,10,12 are valid)
-        auto_calibration: "yes",        // Trigger auto-calibration when received
-        blePrefix1: "",                 // No custom BLE prefix for this example
-        blePrefix2: "",                 // No custom BLE prefix for this example
-        blePrefix3: "",                 // No custom BLE prefix for this example
-        bleScanTime: 2,                 // BLE scan time (long scan time, in seconds)
-        setDefaultSettings: ""          // Not resetting to factory settings
-    }
-};
-
+    var Input_config = {
+        data: {
+            otaaPeriods: 30,               // Selected OTAA period (30 seconds)
+            confirmedHeatbeat: true,        // Enable confirmed heartbeat messages
+            bleScanner: "off",               // BLE scanner is enabled
+            cal_value_force_1: 0,           // Calibration value for force 1
+            cal_value_force_2: 0,           // Calibration value for force 2
+            check_int: 10,                  // Time interval between force measurements (in seconds - only 4,5,7,8,10,12 are valid)
+            auto_calibration: "yes",        // Trigger auto-calibration when received
+            blePrefix1: "",                 // No custom BLE prefix for this example
+            blePrefix2: "",                 // No custom BLE prefix for this example
+            blePrefix3: "",                 // No custom BLE prefix for this example
+            bleScanTime: 2,                 // BLE scan time (long scan time, in seconds)
+            setDefaultSettings: ""          // Not resetting to factory settings
+        }
+    };
     </pre>
 
   <h2>Generating a Downlink Message</h2>
