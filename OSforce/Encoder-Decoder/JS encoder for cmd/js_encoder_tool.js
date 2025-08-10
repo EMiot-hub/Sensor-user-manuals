@@ -1,7 +1,9 @@
+// node js_encoder_tool.js
 var otaaPeriods = [30, 60, 120, 240, 360, 480, 600, 720];
 var confirmedHeatbeat = [false, true];
 var bleScanner = ["off", "on"];
 var calValues = [-100, -75, -50, -25, 0, 25, 50, 75, 100];
+var check_int_val = [4,5,7,8,10,12];
 var scanTimeOptions = [1, 2];
 var setDefaultSettings = ["yes"];
 var auto_calibration = ["yes"];
@@ -26,8 +28,13 @@ function encodeDownlink(input) {
     // Convert calibration values for force 1 to 4
     bytes.push(calValues.indexOf(input.data.cal_value_force_1) >= 0 ? calValues.indexOf(input.data.cal_value_force_1) : 255);
     bytes.push(calValues.indexOf(input.data.cal_value_force_2) >= 0 ? calValues.indexOf(input.data.cal_value_force_2) : 255);
-    bytes.push(calValues.indexOf(input.data.cal_value_force_3) >= 0 ? calValues.indexOf(input.data.cal_value_force_3) : 255);
-    bytes.push(calValues.indexOf(input.data.cal_value_force_4) >= 0 ? calValues.indexOf(input.data.cal_value_force_4) : 255);
+
+    // check_int is used to set the time interval between force measurements
+    bytes.push(check_int_val.indexOf(input.data.check_int) >= 0 ? check_int_val.indexOf(input.data.check_int) : 255);
+
+    //
+    bytes.push(255);
+
 
     bytes.push(auto_calibration.indexOf(input.data.auto_calibration) >= 0 ? auto_calibration.indexOf(input.data.auto_calibration) : 255);
 
@@ -48,13 +55,14 @@ function encodeDownlink(input) {
         bytes.push(255);
     }
 
+    // Convert default settings
+    var setDefaultSettingsIndex = setDefaultSettings.indexOf(input.data.setDefaultSettings);
+    bytes.push(setDefaultSettingsIndex >= 0 ? setDefaultSettingsIndex + 1 : 255);
+
     // Convert BLE scan time
     var scanTimeIndex = scanTimeOptions.indexOf(input.data.bleScanTime);
     bytes.push(scanTimeIndex >= 0 ? scanTimeIndex : 255);
 
-    // Convert default settings
-    var setDefaultSettingsIndex = setDefaultSettings.indexOf(input.data.setDefaultSettings);
-    bytes.push(setDefaultSettingsIndex >= 0 ? setDefaultSettingsIndex : 255);
 
     // Handle custom BLE Prefix 1, 2, and 3
     if (input.data.blePrefix1 && input.data.blePrefix1.length === 6) {
@@ -89,11 +97,10 @@ var Input_config = {
     data: {
         otaaPeriods: 30,               // Selected OTAA period (30 seconds)
         confirmedHeatbeat: true,        // Enable confirmed heartbeat messages
-        bleScanner: "on",               // BLE scanner is enabled
+        bleScanner: "off",               // BLE scanner is enabled
         cal_value_force_1: 0,           // Calibration value for force 1
         cal_value_force_2: 0,           // Calibration value for force 2
-        cal_value_force_3: 0,           // Calibration value for force 3
-        cal_value_force_4: 0,           // Calibration value for force 4
+        check_int: 10,                  // Time interval between force measurements (in seconds - only 4,5,7,8,10,12 are valid)
         auto_calibration: "yes",        // Trigger auto-calibration when received
         blePrefix1: "",                 // No custom BLE prefix for this example
         blePrefix2: "",                 // No custom BLE prefix for this example

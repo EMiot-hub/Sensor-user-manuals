@@ -30,6 +30,9 @@
         <li><strong>Calibration Values for Forces (<code>cal_value_force_1</code>, <code>cal_value_force_2</code>, <code>cal_value_force_3</code>, <code>cal_value_force_4</code>)</strong>: Defines the calibration values for four different forces. Allowed values:
             <pre>[-100, -75, -50, -25, 0, 25, 50, 75, 100]</pre>
         </li>
+        <li><strong>Check_int (<code>Check_int</code>)</strong>: Defines the interval between mesurment. Allowed values:
+            <pre>[4, 5, 7, 8, 10, 12]</pre>
+        </li>
         <li><strong>Auto Calibration (<code>auto_calibration</code>)</strong>: When set, this triggers an immediate calibration of the sensor when the message is received:
             <pre>"yes" // Trigger auto-calibration<br>""    // Leave empty if not triggering calibration</pre>
         </li>
@@ -46,15 +49,14 @@
 
   <h2>Example Input Configuration</h2>
     <pre>
-    var Input_config = {
+var Input_config = {
     data: {
         otaaPeriods: 30,               // Selected OTAA period (30 seconds)
         confirmedHeatbeat: true,        // Enable confirmed heartbeat messages
-        bleScanner: "on",               // BLE scanner is enabled
+        bleScanner: "off",               // BLE scanner is enabled
         cal_value_force_1: 0,           // Calibration value for force 1
         cal_value_force_2: 0,           // Calibration value for force 2
-        cal_value_force_3: 0,           // Calibration value for force 3
-        cal_value_force_4: 0,           // Calibration value for force 4
+        check_int: 10,                  // Time interval between force measurements (in seconds - only 4,5,7,8,10,12 are valid)
         auto_calibration: "yes",        // Trigger auto-calibration when received
         blePrefix1: "",                 // No custom BLE prefix for this example
         blePrefix2: "",                 // No custom BLE prefix for this example
@@ -63,6 +65,7 @@
         setDefaultSettings: ""          // Not resetting to factory settings
     }
 };
+
     </pre>
 
   <h2>Generating a Downlink Message</h2>
@@ -80,7 +83,7 @@ node .\js_encoder_tool.js
 
   <h3>Sample Output:</h3>
     <pre>
-    { hexString: '0001010404040400FFFFFF01FF', fPort: 10 }
+    { hexString: '000100040404FF00FFFFFFFF01', fPort: 10 }
     </pre>
 <h2>Requirements for Running the Program</h2>
 
@@ -101,6 +104,7 @@ node .\js_encoder_tool.js
       <li>Confirmed Heartbeat</li>
       <li>BLE Scanner</li>
       <li>Calibration Values for Forces</li>
+      <li>Mesurement check interval</li>
       <li>Auto Calibration</li>
       <li>BLE Prefixes - and if set please set prefix 1 first then 2 and 3</li>
       <li>BLE Scan Time</li>
